@@ -135,6 +135,25 @@ def iniciative():
         print()
         print(str(index+1) + ')', list_iniciative[index])
 
+def updatestats():
+    rows = monstertable.row_count
+    for i in range(2, rows + 1):
+        print(str(i-1) + ')', monstertable.cell(i,1).value)
+    upstat = int(input('Choose the monster that you want to update: '))
+    upstat = upstat + 1
+    while True:
+        for i in range(1,29):
+            print(str(i) + ')', monstertable.cell(1,i).value)
+        statnum = int(input('Choose the Stat you want to update: '))
+        print('Current Stat of %s: %s' %(monstertable.cell(1,statnum).value, monstertable.cell(upstat, statnum).value))
+        newstat = input('New Stat: ')
+        monstertable.update_cell(upstat, statnum, newstat)
+
+        print()
+        choice = input('Do you Want to Update any other Stat of %s?(y/n): ' %monstertable.cell(upstat, 1).value)
+        if choice == 'n':
+            break
+
 def main():
     while True:
         print()
@@ -142,6 +161,7 @@ def main():
         print('2) Delete a Monster')
         print('3) Show Monster Stats')
         print('4) Initiative Tracker')
+        print('5) Update Stats')
         print()
         menu = input('Choose one option(0 to Exit): ')
         if menu == '1':
@@ -152,6 +172,8 @@ def main():
             show_monster_menu()
         if menu == '4':
             iniciative()
+        if menu == '5':
+            updatestats()
         if menu == '0':
             break
 main()
